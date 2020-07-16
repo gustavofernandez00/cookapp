@@ -1,6 +1,7 @@
 package com.gustavo.cookapp.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -44,7 +45,9 @@ class HomeFragment : Fragment() {
         viewModel.getMealList.observe(viewLifecycleOwner, Observer { result ->
             when(result) {
                 is Resource.Loading -> {}
-                is Resource.Success -> {}
+                is Resource.Success -> {
+                    Log.d("MEALS", "Lista de comidas: ${result.data}")
+                }
                 is Resource.Failure -> {
                     Toast.makeText(requireContext(), "Ha ocurrido un error: ${result.exception}", Toast.LENGTH_SHORT).show()
                 }

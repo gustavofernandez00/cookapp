@@ -54,4 +54,6 @@ data class Meal (
 	@SerializedName("dateModified") val dateModified : String
 )
 
-data class MealList(val meals: List<Meal>)
+data class MealList(
+	@SerializedName("meals")
+	val meals: List<Meal>)
