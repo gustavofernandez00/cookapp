@@ -1,13 +1,16 @@
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Meal (
 	@SerializedName("idMeal") val idMeal : Int = 0,
 	@SerializedName("strMeal") val strMeal : String = "",
 	@SerializedName("strDrinkAlternate") val strDrinkAlternate : String,
 	@SerializedName("strCategory") val strCategory : String,
 	@SerializedName("strArea") val strArea : String,
-	@SerializedName("strInstructions") val strInstructions : String,
-	@SerializedName("strMealThumb") val strMealThumb : String,
+	@SerializedName("strInstructions") val strInstructions : String = "",
+	@SerializedName("strMealThumb") val strMealThumb : String = "",
 	@SerializedName("strTags") val strTags : String,
 	@SerializedName("strYoutube") val strYoutube : String,
 	@SerializedName("strIngredient1") val strIngredient1 : String,
@@ -52,7 +55,7 @@ data class Meal (
 	@SerializedName("strMeasure20") val strMeasure20 : String,
 	@SerializedName("strSource") val strSource : String,
 	@SerializedName("dateModified") val dateModified : String
-)
+) : Parcelable
 
 data class MealList(
 	@SerializedName("meals")
