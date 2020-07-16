@@ -7,14 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.gustavo.cookapp.R
 import com.gustavo.cookapp.base.Resource
 import com.gustavo.cookapp.data.datasource.Datasource
 import com.gustavo.cookapp.domain.MealRepositoryImpl
+import com.gustavo.cookapp.presentation.adapters.MainViewAdapter
 import com.gustavo.cookapp.presentation.viewmodels.MainViewModel
 import com.gustavo.cookapp.presentation.viewmodels.MainViewModelFactory
+import kotlinx.android.synthetic.main.fragment_home.*
 
 
 class HomeFragment : Fragment() {
@@ -38,17 +42,37 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupObservers()
-        viewModel.setMeal("Arrabiata")
+        setupRecyclerViewMeals()
+
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+               return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                viewModel.setMeal(newText!!)
+                return false
+            }
+        })
+    }
+
+    private fun setupRecyclerViewMeals() {
+        rv_meals.layoutManager = LinearLayoutManager(requireContext())
     }
 
     private fun setupObservers() {
         viewModel.getMealList.observe(viewLifecycleOwner, Observer { result ->
             when(result) {
-                is Resource.Loading -> {}
+                is Resource.Loading -> {
+                    progressBar.visibility = View.VISIBLE
+                }
                 is Resource.Success -> {
                     Log.d("MEALS", "Lista de comidas: ${result.data}")
+                    progressBar.visibility = View.GONE
+                    rv_meals.adapter = MainViewAdapter(requireContext(), result.data)
                 }
                 is Resource.Failure -> {
+                    progressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "Ha ocurrido un error: ${result.exception}", Toast.LENGTH_SHORT).show()
                 }
             }
