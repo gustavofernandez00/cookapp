@@ -1,8 +1,8 @@
 import com.google.gson.annotations.SerializedName
 
 data class Meal (
-	@SerializedName("idMeal") val idMeal : Int,
-	@SerializedName("strMeal") val strMeal : String,
+	@SerializedName("idMeal") val idMeal : Int = 0,
+	@SerializedName("strMeal") val strMeal : String = "",
 	@SerializedName("strDrinkAlternate") val strDrinkAlternate : String,
 	@SerializedName("strCategory") val strCategory : String,
 	@SerializedName("strArea") val strArea : String,
@@ -53,3 +53,5 @@ data class Meal (
 	@SerializedName("strSource") val strSource : String,
 	@SerializedName("dateModified") val dateModified : String
 )
+
+data class MealList(val meals: List<Meal>)
