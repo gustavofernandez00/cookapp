@@ -1,7 +1,8 @@
-package com.gustavo.cookapp
+package com.gustavo.cookapp.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.gustavo.cookapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
