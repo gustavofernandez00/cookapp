@@ -1,4 +1,4 @@
-package com.gustavo.cookapp.utils
+package com.gustavo.cookapp.base
 
 import java.lang.Exception
 
