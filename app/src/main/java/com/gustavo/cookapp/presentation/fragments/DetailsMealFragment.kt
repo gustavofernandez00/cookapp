@@ -42,7 +42,7 @@ class DetailsMealFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //fix me
-        //setupDetails()
+        //statsetupDetails()
     }
 
     private fun setupDetails() {
